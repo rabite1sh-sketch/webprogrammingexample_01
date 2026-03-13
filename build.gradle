@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.fanpage'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 1. 웹 및 타임리프 (UI)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // 2. 데이터베이스 (JPA & MySQL)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // 3. 보안 (Security)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 4. 메일 발송
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // 5. 엑셀 다운로드 (Apache POI)
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+
+    // 6. 상태 모니터링 (Actuator)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // 7. 롬복 (Lombok)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // 8. 테스트 도구
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // JWT 라이브러리 (토큰 생성 및 검증용)
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
