@@ -1,0 +1,149 @@
+:root {
+    --main-bg: #faf3e0;
+    --orange: #e67e22;
+    --purple: #8e44ad;
+    --dark: #34495e;
+    --green: #27ae60;
+    --red: #e74c3c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: 'Malgun Gothic', sans-serif;
+    background: var(--main-bg);
+    color: #333;
+}
+
+.hidden { display: none !important; }
+
+.top-header {
+    background: #fff;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.logo { margin: 0; color: var(--orange); }
+.container { width: min(960px, 92vw); margin: 24px auto 48px; }
+
+.inline-form,
+.signup-step,
+.input-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.signup-form {
+    margin-top: 8px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.signup-details {
+    margin-top: 10px;
+    display: grid;
+    gap: 8px;
+}
+
+input {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.btn {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-dark { background: var(--dark); }
+.btn-green { background: var(--green); }
+.btn-red { background: var(--red); }
+.btn-blue { background: #3498db; }
+.btn-purple { background: var(--purple); }
+.btn-orange { background: var(--orange); }
+
+.donation-status {
+    background: var(--orange);
+    color: #fff;
+    padding: 18px 26px;
+    border-radius: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.intro-section { text-align: center; margin: 26px 0; line-height: 1.7; }
+
+.section-title-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.item-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.tmi-container,
+.board-container,
+.admin-tools {
+    margin-top: 24px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.comment-box {
+    background: #f8f8f8;
+    border-left: 4px solid var(--orange);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.comment-name { font-weight: 700; color: var(--orange); }
+.comment-time { font-size: 12px; color: #777; }
