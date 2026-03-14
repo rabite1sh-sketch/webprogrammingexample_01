@@ -35,6 +35,7 @@ public class SecurityConfig {
                     
                     // 🔥 프론트엔드가 화면을 그리기 위해 요청하는 데이터 주소들 (프리패스!)
                     "/items", "/items/**",        // 기부 품목 리스트
+                    "/item/**",                    // 기부 품목 상세 페이지
                     "/donation",                  // 현재 기부 총액
                     "/comments", "/comments/**",  // 응원 메시지 리스트
                     

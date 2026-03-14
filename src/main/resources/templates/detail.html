@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기부 품목 상세</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+    <style>
+        .detail-layout {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .detail-image-wrap {
+            background: #f6f7fb;
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+        }
+        .detail-image {
+            width: 100%;
+            max-width: 360px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .donation-highlight {
+            margin-top: 18px;
+            background: linear-gradient(135deg, #e8f7ec, #f3fff8);
+            border: 1px solid #b9e5c5;
+            border-radius: 12px;
+            padding: 16px;
+            line-height: 1.7;
+        }
+        .donation-highlight strong {
+            color: #1f7a3d;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>기부 품목 상세</h1>
+
+    <section class="detail-layout" th:if="${item != null}">
+        <div class="detail-image-wrap">
+            <img class="detail-image"
+                 th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
+                 th:src="@{'/images/' + ${item.imageUrl}}"
+                 src="/images/donate_item1.svg"
+                 th:alt="${item.title}">
+        </div>
+
+        <article>
+            <h2 th:text="${item.title}">기부 제목</h2>
+            <p th:text="${item.content}">기부 설명</p>
+            <p>
+                <strong>기부 금액:</strong>
+                <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</span>
+            </p>
+
+            <div class="donation-highlight">
+                <p>
+                    이 기부 아이템의 금액은
+                    <strong th:text="${item.donationTarget}">초록우산</strong>
+                    에 전달됩니다.
+                </p>
+                <p>
+                    사용처 예시:
+                    <strong th:text="${item.donationDescription}">저소득층 아동 식사 지원 및 교육용 물품 제공</strong>
+                </p>
+            </div>
+        </article>
+    </section>
+
+    <div class="button-group" style="margin-top: 20px;">
+        <a class="btn btn-dark" th:href="@{/}" href="/">뒤로가기</a>
+    </div>
+</div>
+</body>
+</html>
