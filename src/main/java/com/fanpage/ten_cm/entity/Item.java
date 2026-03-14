@@ -15,11 +15,20 @@ public class Item {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
     @Column(nullable = false)
     private int price;
 
-    @Column(name = "image_url") 
+    @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(nullable = false)
+    private String donationTarget;
+
+    @Column(columnDefinition = "TEXT")
+    private String donationDescription;
 }

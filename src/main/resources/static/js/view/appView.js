@@ -54,21 +54,25 @@ export class AppView {
         this.el.itemList.innerHTML = '';
         const isAdmin = currentUser?.id === 'admin';
 
-        const detailPageMap = ['/donate/item1', '/donate/item2', '/donate/item3'];
-
-        items.forEach((item, index) => {
-            const detailUrl = detailPageMap[index] || '#';
-            const detailLink = detailUrl === '#'
-                ? `<img class="item-image" src="/images/${item.imageUrl}" alt="${item.name}"><h3>${item.name}</h3>`
-                : `<a href="${detailUrl}"><img class="item-image" src="/images/${item.imageUrl}" alt="${item.name}"><h3>${item.name}</h3></a>`;
+        items.forEach((item) => {
+            const detailUrl = `/item/${item.id}`;
+            const imageTag = item.imageUrl
+                ? `<a href="${detailUrl}"><img class="item-image" src="/images/${item.imageUrl}" alt="${item.title}"></a>`
+                : '';
 
             const card = document.createElement('article');
             card.className = 'item-card';
             card.dataset.itemId = item.id;
             card.innerHTML = `
-                ${detailLink}
-                <p>${Number(item.price).toLocaleString()}원</p>
-                <button class="btn btn-purple" data-action="donate">기부하기</button>
+                ${imageTag}
+                <h3>${item.title}</h3>
+                <p>${item.content || ''}</p>
+                <p><strong>${Number(item.price).toLocaleString()}원</strong></p>
+                <p><strong>${item.donationTarget || '기부 단체 미정'}</strong> 기부</p>
+                <div class="card-actions">
+                    <a class="btn btn-orange btn-detail" href="${detailUrl}">자세히 보기</a>
+                    <button class="btn btn-purple btn-donate" data-action="donate">기부하기</button>
+                </div>
                 ${isAdmin ? `<div class="card-actions">
                     <button class="btn btn-orange" data-action="edit">수정</button>
                     <button class="btn btn-red" data-action="delete">삭제</button>

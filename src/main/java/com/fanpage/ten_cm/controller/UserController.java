@@ -1,47 +1,52 @@
 package com.fanpage.ten_cm.controller;
 
 import com.fanpage.ten_cm.entity.User;
+import com.fanpage.ten_cm.service.EmailVerificationService;
 import com.fanpage.ten_cm.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController // 프론트가 원하는 JSON으로 대답합니다!
-@CrossOrigin(origins = "*") // CORS 차단 에러 방지
+@RestController
+@CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final EmailVerificationService emailVerificationService;
 
-    // ================= [ 1. 회원 가입 ] =================
     @PostMapping("/signup")
     public Map<String, Object> signup(@RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
-        
+
         try {
+            if (!emailVerificationService.isEmailVerified(user.getEmail())) {
+                throw new IllegalStateException("이메일 인증이 완료되지 않았습니다. 인증 링크 또는 인증번호 확인을 먼저 진행해 주세요.");
+            }
+
             userService.registerUser(user);
+            emailVerificationService.consumeVerifiedEmail(user.getEmail());
             response.put("success", true);
             response.put("message", "회원가입이 완료되었습니다.");
         } catch (IllegalStateException e) {
             response.put("success", false);
-            response.put("message", e.getMessage()); 
+            response.put("message", e.getMessage());
         } catch (Exception e) {
             response.put("success", false);
             response.put("message", "서버 오류가 발생했습니다.");
         }
-        
+
         return response;
     }
 
-    // ================= [ 2. 회원 탈퇴 ] =================
     @DeleteMapping("/users/{id}")
     public Map<String, Object> withdraw(@PathVariable("id") String id) {
         Map<String, Object> response = new HashMap<>();
-        
+
         try {
-            userService.deleteUser(id); // 서비스 계층에 삭제 요청!
+            userService.deleteUser(id);
             response.put("success", true);
             response.put("message", "회원 탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다.");
         } catch (IllegalArgumentException e) {
@@ -51,7 +56,7 @@ public class UserController {
             response.put("success", false);
             response.put("message", "탈퇴 처리 중 오류가 발생했습니다: " + e.getMessage());
         }
-        
+
         return response;
     }
 }

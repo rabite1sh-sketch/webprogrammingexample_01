@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 인증 결과</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<div class="container" style="max-width: 720px;">
+    <div class="item-card" style="margin-top: 40px;">
+        <h1 th:text="${verified} ? '이메일 인증 성공' : '이메일 인증 실패'">이메일 인증 결과</h1>
+        <p th:text="${message}">인증 결과 메시지</p>
+        <a class="btn btn-dark" th:href="@{/}" href="/">메인으로 이동</a>
+    </div>
+</div>
+</body>
+</html>
