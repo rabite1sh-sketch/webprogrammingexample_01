@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학용품 세트 기부</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <section class="board-container">
+        <h2>학용품 세트 기부</h2>
+        <img class="item-image" th:src="@{/images/donate_item2.svg}" src="/images/donate_item2.svg" alt="학용품 세트 기부 이미지">
+        <p>노트, 필기구, 색연필 등 꼭 필요한 학용품 세트를 지원합니다. 아이들의 배움을 함께 응원해 주세요.</p>
+        <div class="card-actions">
+            <a class="btn btn-dark" th:href="@{/}" href="/">목록으로 돌아가기</a>
+            <button class="btn btn-green" type="button" onclick="location.href='/'">기부하기</button>
+        </div>
+    </section>
+</main>
+</body>
+</html>

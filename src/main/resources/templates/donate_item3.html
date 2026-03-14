@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>긴급 식료품 기부</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <section class="board-container">
+        <h2>긴급 식료품 기부</h2>
+        <img class="item-image" th:src="@{/images/donate_item3.svg}" src="/images/donate_item3.svg" alt="긴급 식료품 기부 이미지">
+        <p>즉시 도움이 필요한 가정에 쌀, 라면, 통조림 등 긴급 식료품을 전달합니다. 든든한 하루를 선물해 주세요.</p>
+        <div class="card-actions">
+            <a class="btn btn-dark" th:href="@{/}" href="/">목록으로 돌아가기</a>
+            <button class="btn btn-green" type="button" onclick="location.href='/'">기부하기</button>
+        </div>
+    </section>
+</main>
+</body>
+</html>
