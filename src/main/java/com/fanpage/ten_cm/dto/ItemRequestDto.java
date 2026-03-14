@@ -1,31 +1,35 @@
 package com.fanpage.ten_cm.dto;
 
-/**
- * 화면에서 보내주는 기부 품목 정보를 담는 그릇(DTO)입니다.
- */
 public class ItemRequestDto {
-    private String name;
+    private String title;
+    private String content;
     private int price;
-    private String imageUrl;
+    private String donationTarget;
 
-    // 1. 기본 생성자 (이게 없으면 스프링이 데이터를 못 담을 때가 많아요!)
     public ItemRequestDto() {
     }
 
-    // 2. 모든 필드를 가진 생성자 (선택사항이지만 안전함)
-    public ItemRequestDto(String name, int price, String imageUrl) {
-        this.name = name;
+    public ItemRequestDto(String title, String content, int price, String donationTarget) {
+        this.title = title;
+        this.content = content;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.donationTarget = donationTarget;
     }
 
-    // 3. Getter & Setter (이 이름들이 Controller의 메서드와 정확히 일치해야 합니다)
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getPrice() {
@@ -36,11 +40,11 @@ public class ItemRequestDto {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getDonationTarget() {
+        return donationTarget;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setDonationTarget(String donationTarget) {
+        this.donationTarget = donationTarget;
     }
 }

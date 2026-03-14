@@ -10,16 +10,19 @@
 <div class="container">
     <h1>기부 품목 상세</h1>
 
-    <div class="item-card" th:if="${item != null}">
-        <h2 th:text="${item.name}">품목명</h2>
-        <p><strong>ID:</strong> <span th:text="${item.id}">1</span></p>
-        <p><strong>가격:</strong> <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</span></p>
-        <p><strong>이미지:</strong> <span th:text="${item.imageUrl}">donate_item1.svg</span></p>
-        <img class="item-image"
-             th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
-             th:src="@{'/images/' + ${item.imageUrl}}"
-             th:alt="${item.name}">
-    </div>
+    <article class="item-card" th:if="${item != null}">
+        <h2 th:text="${item.title}">기부 제목</h2>
+        <p th:text="${item.content}">기부 설명</p>
+        <p>
+            <strong>기부 금액:</strong>
+            <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</span>
+        </p>
+        <p style="font-size: 1.1rem; color: #2c7a2c; font-weight: 700;">
+            이 금액은
+            <span th:text="${item.donationTarget}">초록우산</span>
+            에 기부됩니다.
+        </p>
+    </article>
 
     <div class="button-group" style="margin-top: 20px;">
         <a class="btn btn-dark" th:href="@{/}" href="/">뒤로가기</a>

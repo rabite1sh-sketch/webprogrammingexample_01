@@ -46,9 +46,10 @@ public class ItemController {
     public ResponseEntity<?> addItem(@RequestBody ItemRequestDto request) {
         try {
             Item newItem = new Item();
-            newItem.setName(request.getName());
+            newItem.setTitle(request.getTitle());
+            newItem.setContent(request.getContent());
             newItem.setPrice(request.getPrice());
-            newItem.setImageUrl(request.getImageUrl());
+            newItem.setDonationTarget(request.getDonationTarget());
 
             itemRepository.save(newItem); // DB에 저장!
 
@@ -68,8 +69,10 @@ public class ItemController {
             Optional<Item> optionalItem = itemRepository.findById(id);
             if (optionalItem.isPresent()) {
                 Item item = optionalItem.get();
-                item.setName(request.getName());
+                item.setTitle(request.getTitle());
+                item.setContent(request.getContent());
                 item.setPrice(request.getPrice());
+                item.setDonationTarget(request.getDonationTarget());
 
                 itemRepository.save(item); // 수정된 내용 DB에 덮어쓰기!
 
