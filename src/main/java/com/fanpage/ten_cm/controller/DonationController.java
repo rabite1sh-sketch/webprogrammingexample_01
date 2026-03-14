@@ -7,6 +7,7 @@ import com.fanpage.ten_cm.repository.DonationRepository;
 import com.fanpage.ten_cm.repository.ItemRepository;
 import com.fanpage.ten_cm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -49,7 +50,7 @@ public class DonationController {
     }
 
     private void bindItemDetail(Model model, int index) {
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         Item item = (items.size() > index) ? items.get(index) : null;
         model.addAttribute("item", item);
     }

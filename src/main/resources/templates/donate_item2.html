@@ -12,7 +12,7 @@
         <h2 th:text="${item != null ? item.name : '기부 품목'}">기부 품목</h2>
         <img class="item-image"
              th:if="${item != null}"
-             th:src="@{'/images/' + ${item.imageUrl}}"
+             th:src="@{/images/{img}(img=${item.imageUrl})}"
              th:alt="${item.name}">
         <p th:if="${item != null}">
             <strong th:text="${item.name}">품목명</strong>
