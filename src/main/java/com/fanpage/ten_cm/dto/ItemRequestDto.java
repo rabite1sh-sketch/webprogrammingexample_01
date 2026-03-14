@@ -44,12 +44,12 @@ public class ItemRequestDto {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getDonationTarget() {
+        return donationTarget;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setDonationTarget(String donationTarget) {
+        this.donationTarget = donationTarget;
     }
 
     public String getDonationTarget() {
