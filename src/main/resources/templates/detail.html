@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기부 품목 상세</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>기부 품목 상세</h1>
+
+    <div class="item-card" th:if="${item != null}">
+        <h2 th:text="${item.name}">품목명</h2>
+        <p><strong>ID:</strong> <span th:text="${item.id}">1</span></p>
+        <p><strong>가격:</strong> <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</span></p>
+        <p><strong>이미지:</strong> <span th:text="${item.imageUrl}">donate_item1.svg</span></p>
+        <img class="item-image"
+             th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
+             th:src="@{'/images/' + ${item.imageUrl}}"
+             th:alt="${item.name}">
+    </div>
+
+    <div class="button-group" style="margin-top: 20px;">
+        <a class="btn btn-dark" th:href="@{/}" href="/">뒤로가기</a>
+    </div>
+</div>
+</body>
+</html>
