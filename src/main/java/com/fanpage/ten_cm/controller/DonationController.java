@@ -1,15 +1,19 @@
 package com.fanpage.ten_cm.controller;
 
 import com.fanpage.ten_cm.entity.Donation;
+import com.fanpage.ten_cm.entity.Item;
 import com.fanpage.ten_cm.entity.User;
 import com.fanpage.ten_cm.repository.DonationRepository;
+import com.fanpage.ten_cm.repository.ItemRepository;
 import com.fanpage.ten_cm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,22 +27,33 @@ public class DonationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     @GetMapping("/donate/item1")
-    public String donateItem1Page() {
+    public String donateItem1Page(Model model) {
+        bindItemDetail(model, 0);
         return "donate_item1";
     }
 
     @GetMapping("/donate/item2")
-    public String donateItem2Page() {
+    public String donateItem2Page(Model model) {
+        bindItemDetail(model, 1);
         return "donate_item2";
     }
 
     @GetMapping("/donate/item3")
-    public String donateItem3Page() {
+    public String donateItem3Page(Model model) {
+        bindItemDetail(model, 2);
         return "donate_item3";
     }
 
-    // 1. 기부 결제 성공 시 데이터베이스에 저장!
+    private void bindItemDetail(Model model, int index) {
+        List<Item> items = itemRepository.findAll();
+        Item item = (items.size() > index) ? items.get(index) : null;
+        model.addAttribute("item", item);
+    }
+
     @PostMapping("/donate")
     @ResponseBody
     @Transactional
@@ -85,7 +100,6 @@ public class DonationController {
         return response;
     }
 
-    // 2. 현재까지 총 기부 금액 불러오기
     @GetMapping("/donation")
     @ResponseBody
     public Map<String, Object> getTotalDonation() {
