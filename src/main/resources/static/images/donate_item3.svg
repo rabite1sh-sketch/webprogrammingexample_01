@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#f7f2d6"/>
+  <circle cx="150" cy="150" r="90" fill="#27ae60"/>
+  <text x="150" y="160" text-anchor="middle" font-size="24" fill="#fff" font-family="sans-serif">식료품</text>
+</svg>

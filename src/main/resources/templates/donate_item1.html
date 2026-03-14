@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>겨울 담요 기부</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <section class="board-container">
+        <h2>겨울 담요 기부</h2>
+        <img class="item-image" th:src="@{/images/donate_item1.svg}" src="/images/donate_item1.svg" alt="겨울 담요 기부 이미지">
+        <p>한파에 취약한 이웃에게 따뜻한 겨울 담요를 전달합니다. 여러분의 기부로 누군가의 밤이 포근해집니다.</p>
+        <div class="card-actions">
+            <a class="btn btn-dark" th:href="@{/}" href="/">목록으로 돌아가기</a>
+            <button class="btn btn-green" type="button" onclick="location.href='/'">기부하기</button>
+        </div>
+    </section>
+</main>
+</body>
+</html>
