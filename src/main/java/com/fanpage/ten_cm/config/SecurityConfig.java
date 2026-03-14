@@ -32,7 +32,8 @@ public class SecurityConfig {
                     "/", "/login", "/signup", "/join", 
                     "/css/**", "/js/**", "/images/**", 
                     "/favicon.ico", "/error",
-                    
+                    "/donate/item1", "/donate/item2", "/donate/item3",
+
                     // 🔥 프론트엔드가 화면을 그리기 위해 요청하는 데이터 주소들 (프리패스!)
                     "/items", "/items/**",        // 기부 품목 리스트
                     "/donation",                  // 현재 기부 총액

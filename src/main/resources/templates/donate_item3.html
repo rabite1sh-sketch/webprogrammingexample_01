@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기부 품목 상세 3</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<main class="container">
+    <section class="board-container">
+        <h2 th:text="${item != null ? item.name : '기부 품목'}">기부 품목</h2>
+        <img class="item-image"
+             th:if="${item != null}"
+             th:src="@{/images/{img}(img=${item.imageUrl})}"
+             th:alt="${item.name}">
+        <p th:if="${item != null}">
+            <strong th:text="${item.name}">품목명</strong>
+            기부 상세 페이지입니다. 기부 금액은
+            <strong th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</strong>
+            입니다.
+        </p>
+        <p th:if="${item == null}">등록된 기부 품목 정보를 찾을 수 없습니다.</p>
+
+        <div class="card-actions">
+            <a class="btn btn-dark" th:href="@{/}" href="/">목록으로 돌아가기</a>
+            <button class="btn btn-green" type="button" onclick="location.href='/'">기부하기</button>
+        </div>
+    </section>
+</main>
+</body>
+</html>
