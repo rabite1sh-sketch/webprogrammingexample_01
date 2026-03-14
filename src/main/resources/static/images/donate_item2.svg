@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#e8f6ff"/>
+  <rect x="65" y="70" width="170" height="160" rx="16" fill="#3498db"/>
+  <text x="150" y="160" text-anchor="middle" font-size="24" fill="#fff" font-family="sans-serif">학용품</text>
+</svg>
