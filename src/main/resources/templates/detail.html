@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기부 품목 상세</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>기부 품목 상세</h1>
+
+    <article class="item-card" th:if="${item != null}">
+        <h2 th:text="${item.title}">기부 제목</h2>
+        <p th:text="${item.content}">기부 설명</p>
+        <p>
+            <strong>기부 금액:</strong>
+            <span th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</span>
+        </p>
+        <p style="font-size: 1.1rem; color: #2c7a2c; font-weight: 700;">
+            이 금액은
+            <span th:text="${item.donationTarget}">초록우산</span>
+            에 기부됩니다.
+        </p>
+    </article>
+
+    <div class="button-group" style="margin-top: 20px;">
+        <a class="btn btn-dark" th:href="@{/}" href="/">뒤로가기</a>
+    </div>
+</div>
+</body>
+</html>
