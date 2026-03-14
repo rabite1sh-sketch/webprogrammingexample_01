@@ -60,7 +60,7 @@
         </div>
 
         <div id="item-list" class="item-container" aria-label="기부 상세 품목 바로가기">
-            <article class="item-card" th:each="item : ${items}">
+            <article class="item-card" th:each="item : ${items}" th:attr="data-item-id=${item.id}">
                 <a th:href="@{/item/{id}(id=${item.id})}">
                     <img class="item-image"
                          th:if="${item.imageUrl != null and !#strings.isEmpty(item.imageUrl)}"
@@ -72,7 +72,8 @@
                 <p th:text="${item.content}">기부 아이템 설명</p>
                 <p><strong th:text="${#numbers.formatInteger(item.price, 0, 'COMMA') + '원'}">0원</strong></p>
                 <div class="card-actions">
-                    <a class="btn btn-orange" th:href="@{/item/{id}(id=${item.id})}">자세히 보기</a>
+                    <a class="btn btn-orange btn-detail" th:href="@{/item/{id}(id=${item.id})}">자세히 보기</a>
+                    <button type="button" class="btn btn-purple btn-donate" data-action="donate">기부하기</button>
                 </div>
             </article>
         </div>

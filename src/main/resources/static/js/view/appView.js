@@ -70,8 +70,8 @@ export class AppView {
                 <p><strong>${Number(item.price).toLocaleString()}원</strong></p>
                 <p><strong>${item.donationTarget || '기부 단체 미정'}</strong> 기부</p>
                 <div class="card-actions">
-                    <a class="btn btn-orange" href="${detailUrl}">자세히 보기</a>
-                    <button class="btn btn-purple" data-action="donate">기부하기</button>
+                    <a class="btn btn-orange btn-detail" href="${detailUrl}">자세히 보기</a>
+                    <button class="btn btn-purple btn-donate" data-action="donate">기부하기</button>
                 </div>
                 ${isAdmin ? `<div class="card-actions">
                     <button class="btn btn-orange" data-action="edit">수정</button>

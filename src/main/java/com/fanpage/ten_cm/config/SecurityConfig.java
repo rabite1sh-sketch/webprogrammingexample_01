@@ -40,7 +40,7 @@ public class SecurityConfig {
                     "/comments", "/comments/**",  // 응원 메시지 리스트
                     
                     // 🔥 이메일 인증 관련 주소 (토큰이 없어도 할 수 있어야 함)
-                    "/send-verification", "/verify-code"
+                    "/send-verification", "/verify-code", "/verify-email"
                 ).permitAll()
                 
                 // 나머지는 무조건 토큰(인증) 필요! (예: 기부 결제, 관리자 기능 등)
