@@ -1,19 +1,24 @@
 package com.fanpage.ten_cm.controller;
 
 import com.fanpage.ten_cm.entity.Donation;
+import com.fanpage.ten_cm.entity.Item;
 import com.fanpage.ten_cm.entity.User;
 import com.fanpage.ten_cm.repository.DonationRepository;
+import com.fanpage.ten_cm.repository.ItemRepository;
 import com.fanpage.ten_cm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional; // 👈 추가
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
-@RestController
+@Controller
 public class DonationController {
 
     @Autowired
@@ -22,9 +27,36 @@ public class DonationController {
     @Autowired
     private UserRepository userRepository;
 
-    // 1. 기부 결제 성공 시 데이터베이스에 저장!
+    @Autowired
+    private ItemRepository itemRepository;
+
+    @GetMapping("/donate/item1")
+    public String donateItem1Page(Model model) {
+        bindItemDetail(model, 0);
+        return "donate_item1";
+    }
+
+    @GetMapping("/donate/item2")
+    public String donateItem2Page(Model model) {
+        bindItemDetail(model, 1);
+        return "donate_item2";
+    }
+
+    @GetMapping("/donate/item3")
+    public String donateItem3Page(Model model) {
+        bindItemDetail(model, 2);
+        return "donate_item3";
+    }
+
+    private void bindItemDetail(Model model, int index) {
+        List<Item> items = itemRepository.findAll();
+        Item item = (items.size() > index) ? items.get(index) : null;
+        model.addAttribute("item", item);
+    }
+
     @PostMapping("/donate")
-    @Transactional // 👈 에러 발생 시 롤백하고, 정상일 때 확실히 DB에 저장(Commit)하도록 보장합니다.
+    @ResponseBody
+    @Transactional
     public Map<String, Object> addDonation(@RequestBody Map<String, Object> requestData) {
         Map<String, Object> response = new HashMap<>();
 
@@ -32,7 +64,6 @@ public class DonationController {
             System.out.println("\n=== 💸 기부 저장 요청 도달 ===");
             System.out.println("프론트에서 온 데이터: " + requestData);
 
-            // 데이터 누락 방어 로직
             if (!requestData.containsKey("amount") || !requestData.containsKey("user_id")) {
                 System.out.println("❌ 데이터 누락: amount 또는 user_id가 없습니다.");
                 response.put("success", false);
@@ -44,14 +75,14 @@ public class DonationController {
             String userId = (String) requestData.get("user_id");
 
             Optional<User> optionalUser = userRepository.findById(userId);
-            
+
             if (optionalUser.isPresent()) {
                 Donation donation = new Donation();
                 donation.setAmount(amount);
                 donation.setUser(optionalUser.get());
 
                 donationRepository.save(donation);
-                
+
                 System.out.println("✅ DB 저장 성공! 금액: " + amount + "원 / 유저: " + userId);
                 response.put("success", true);
             } else {
@@ -61,16 +92,16 @@ public class DonationController {
             }
         } catch (Exception e) {
             System.err.println("🔥 기부 처리 중 서버 에러 발생!");
-            e.printStackTrace(); 
+            e.printStackTrace();
             response.put("success", false);
             response.put("message", "결제 처리 중 에러가 발생했습니다.");
         }
-        
+
         return response;
     }
 
-    // 2. 현재까지 총 기부 금액 불러오기
     @GetMapping("/donation")
+    @ResponseBody
     public Map<String, Object> getTotalDonation() {
         Map<String, Object> response = new HashMap<>();
         try {

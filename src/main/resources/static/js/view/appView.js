@@ -54,13 +54,19 @@ export class AppView {
         this.el.itemList.innerHTML = '';
         const isAdmin = currentUser?.id === 'admin';
 
-        items.forEach((item) => {
+        const detailPageMap = ['/donate/item1', '/donate/item2', '/donate/item3'];
+
+        items.forEach((item, index) => {
+            const detailUrl = detailPageMap[index] || '#';
+            const detailLink = detailUrl === '#'
+                ? `<img class="item-image" src="/images/${item.imageUrl}" alt="${item.name}"><h3>${item.name}</h3>`
+                : `<a href="${detailUrl}"><img class="item-image" src="/images/${item.imageUrl}" alt="${item.name}"><h3>${item.name}</h3></a>`;
+
             const card = document.createElement('article');
             card.className = 'item-card';
             card.dataset.itemId = item.id;
             card.innerHTML = `
-                <img class="item-image" src="/images/${item.imageUrl}" alt="${item.name}">
-                <h3>${item.name}</h3>
+                ${detailLink}
                 <p>${Number(item.price).toLocaleString()}원</p>
                 <button class="btn btn-purple" data-action="donate">기부하기</button>
                 ${isAdmin ? `<div class="card-actions">
