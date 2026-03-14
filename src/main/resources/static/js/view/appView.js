@@ -56,17 +56,23 @@ export class AppView {
 
         items.forEach((item) => {
             const detailUrl = `/item/${item.id}`;
-            const detailLink = `<a href="${detailUrl}"><h3>${item.title}</h3></a>`;
+            const imageTag = item.imageUrl
+                ? `<a href="${detailUrl}"><img class="item-image" src="/images/${item.imageUrl}" alt="${item.title}"></a>`
+                : '';
 
             const card = document.createElement('article');
             card.className = 'item-card';
             card.dataset.itemId = item.id;
             card.innerHTML = `
-                ${detailLink}
-                <p>${item.content || ""}</p>
-                <p><strong>${item.donationTarget || "기부 단체 미정"}</strong>에 기부</p>
-                <p>${Number(item.price).toLocaleString()}원</p>
-                <button class="btn btn-purple" data-action="donate">기부하기</button>
+                ${imageTag}
+                <h3>${item.title}</h3>
+                <p>${item.content || ''}</p>
+                <p><strong>${Number(item.price).toLocaleString()}원</strong></p>
+                <p><strong>${item.donationTarget || '기부 단체 미정'}</strong> 기부</p>
+                <div class="card-actions">
+                    <a class="btn btn-orange" href="${detailUrl}">자세히 보기</a>
+                    <button class="btn btn-purple" data-action="donate">기부하기</button>
+                </div>
                 ${isAdmin ? `<div class="card-actions">
                     <button class="btn btn-orange" data-action="edit">수정</button>
                     <button class="btn btn-red" data-action="delete">삭제</button>

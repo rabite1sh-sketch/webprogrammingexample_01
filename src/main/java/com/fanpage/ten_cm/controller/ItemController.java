@@ -49,7 +49,9 @@ public class ItemController {
             newItem.setTitle(request.getTitle());
             newItem.setContent(request.getContent());
             newItem.setPrice(request.getPrice());
+            newItem.setImageUrl(request.getImageUrl());
             newItem.setDonationTarget(request.getDonationTarget());
+            newItem.setDonationDescription(request.getDonationDescription());
 
             itemRepository.save(newItem); // DB에 저장!
 
@@ -72,7 +74,9 @@ public class ItemController {
                 item.setTitle(request.getTitle());
                 item.setContent(request.getContent());
                 item.setPrice(request.getPrice());
+                item.setImageUrl(request.getImageUrl());
                 item.setDonationTarget(request.getDonationTarget());
+                item.setDonationDescription(request.getDonationDescription());
 
                 itemRepository.save(item); // 수정된 내용 DB에 덮어쓰기!
 

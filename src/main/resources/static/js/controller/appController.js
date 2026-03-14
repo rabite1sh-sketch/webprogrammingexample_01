@@ -144,12 +144,14 @@ class AppController {
     async handleCreateItem() {
         const title = prompt('추가할 기부 품목 제목');
         const content = prompt('기부 품목 설명');
+        const imageUrl = prompt('이미지 파일명 (예: donate_item1.svg)', 'donate_item1.svg') || '';
         const donationTarget = prompt('기부 단체명 (예: 초록우산)');
+        const donationDescription = prompt('기부 사용 설명 (예: 결식 아동 지원)');
         const price = Number(prompt('가격(숫자)'));
-        if (!title || !donationTarget || Number.isNaN(price)) return alert('올바른 값을 입력해 주세요.');
+        if (!title || !donationTarget || !donationDescription || Number.isNaN(price)) return alert('올바른 값을 입력해 주세요.');
 
         try {
-            await this.model.createItem({ title, content, donationTarget, price });
+            await this.model.createItem({ title, content, price, imageUrl, donationTarget, donationDescription });
             await this.refreshAll();
         } catch (error) {
             alert(error.message);
@@ -169,10 +171,12 @@ class AppController {
         if (action === 'edit') {
             const title = prompt('새 품목 제목', item.title);
             const content = prompt('새 설명', item.content || '');
+            const imageUrl = prompt('새 이미지 파일명', item.imageUrl || '');
             const donationTarget = prompt('새 기부 단체명', item.donationTarget || '');
+            const donationDescription = prompt('새 기부 사용 설명', item.donationDescription || '');
             const price = Number(prompt('새 가격', item.price));
-            if (!title || !donationTarget || Number.isNaN(price)) return;
-            await this.model.updateItem(item.id, { title, content, donationTarget, price });
+            if (!title || !donationTarget || !donationDescription || Number.isNaN(price)) return;
+            await this.model.updateItem(item.id, { title, content, price, imageUrl, donationTarget, donationDescription });
             return this.refreshAll();
         }
         if (action === 'delete') {

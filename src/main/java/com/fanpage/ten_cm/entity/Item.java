@@ -23,6 +23,12 @@ public class Item {
     @Column(nullable = false)
     private int price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(nullable = false)
     private String donationTarget;
+
+    @Column(columnDefinition = "TEXT")
+    private String donationDescription;
 }
