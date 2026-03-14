@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>10cm 따뜻한 기부 팬페이지</title>
     <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css">
 </head>
 <body>
 <header class="top-header">
@@ -58,6 +58,36 @@
             <h2>기부 아이템</h2>
             <button id="add-item-btn" class="btn btn-orange hidden" type="button">관리자: 품목 추가</button>
         </div>
+
+        <div class="item-container" aria-label="기부 상세 품목 바로가기">
+            <article class="item-card">
+                <img class="item-image" th:src="@{/images/donate_item1.svg}" src="/images/donate_item1.svg" alt="겨울 담요 기부 이미지">
+                <h3>겨울 담요 기부</h3>
+                <p>따뜻한 밤을 위한 담요 후원</p>
+                <div class="card-actions">
+                    <a class="btn btn-orange" th:href="@{/donate/item1}" href="/donate/item1">자세히 보기</a>
+                </div>
+            </article>
+
+            <article class="item-card">
+                <img class="item-image" th:src="@{/images/donate_item2.svg}" src="/images/donate_item2.svg" alt="학용품 세트 기부 이미지">
+                <h3>학용품 세트 기부</h3>
+                <p>아이들의 배움을 응원하는 후원</p>
+                <div class="card-actions">
+                    <a class="btn btn-orange" th:href="@{/donate/item2}" href="/donate/item2">자세히 보기</a>
+                </div>
+            </article>
+
+            <article class="item-card">
+                <img class="item-image" th:src="@{/images/donate_item3.svg}" src="/images/donate_item3.svg" alt="긴급 식료품 기부 이미지">
+                <h3>긴급 식료품 기부</h3>
+                <p>도움이 필요한 가정에 식료품 전달</p>
+                <div class="card-actions">
+                    <a class="btn btn-orange" th:href="@{/donate/item3}" href="/donate/item3">자세히 보기</a>
+                </div>
+            </article>
+        </div>
+
         <div id="item-list" class="item-container"></div>
     </section>
 
@@ -80,10 +110,10 @@
 
     <section id="admin-excel-area" class="admin-tools hidden">
         <h2>관리자 기능</h2>
-        <a class="btn btn-dark" href="/excel/download">기부 내역 엑셀 다운로드</a>
+        <a class="btn btn-dark" th:href="@{/excel/download}" href="/excel/download">기부 내역 엑셀 다운로드</a>
     </section>
 </main>
 
-<script type="module" src="/js/controller/appController.js"></script>
+<script type="module" th:src="@{/js/controller/appController.js}" src="/js/controller/appController.js"></script>
 </body>
 </html>
